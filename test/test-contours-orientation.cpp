@@ -136,7 +136,7 @@ void testContoursOrientation(const std::string &filename) {
 }
 
 void testGradientOrientation(const std::string &filename) {
-  cv::Mat img = cv::imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
+  cv::Mat img = cv::imread(filename, cv::IMREAD_GRAYSCALE);
 
   cv::Mat gradX(img.size(), CV_32F);
   cv::Mat gradY(img.size(), CV_32F);

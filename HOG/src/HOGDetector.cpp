@@ -23,6 +23,10 @@
 using namespace hog;
 
 
+static bool my_isnan(double val) {
+  return val != val;
+}
+
 HOGDetector::HOGDetector() : m_mapOfTemplateInfo(), m_useSpatialRejection(true) {
 }
 
@@ -297,9 +301,9 @@ void HOGDetector::detect_impl(const Template_info_t &template_info, const Query_
     	query_roi.y = i;
 
       calculateHOG_rect(query_hog, query_info.m_integralHOG, query_roi, nbins, nbCellX, nbCellY);
-      double dist = cv::compareHist(template_info.m_hog, query_hog, CV_COMP_BHATTACHARYYA);
+      double dist = cv::compareHist(template_info.m_hog, query_hog, cv::HISTCMP_BHATTACHARYYA);
 
-      if(isnan(dist) || dist > 2*distThresh) {
+      if(/*isnan(dist)*/ my_isnan(dist) || dist > 2*distThresh) {
       	ptr_row_rejection[indexJ] = 0;
       }
     }
@@ -318,9 +322,9 @@ void HOGDetector::detect_impl(const Template_info_t &template_info, const Query_
       	query_roi.y = i;
 
         calculateHOG_rect(query_hog, query_info.m_integralHOG, query_roi, nbins, nbCellX, nbCellY);
-        double dist = cv::compareHist(template_info.m_hog, query_hog, CV_COMP_BHATTACHARYYA);
+        double dist = cv::compareHist(template_info.m_hog, query_hog, cv::HISTCMP_BHATTACHARYYA);
 
-        if(!isnan(dist)) {
+        if(/*!isnan(dist)*/ !my_isnan(dist)) {
           ptr_row[j] = (float) dist;
         }
     	}

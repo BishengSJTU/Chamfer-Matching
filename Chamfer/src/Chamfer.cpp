@@ -1288,7 +1288,7 @@ void ChamferMatcher::getContours(const cv::Mat &img, std::vector<std::vector<cv:
 
   //  std::vector<std::vector<cv::Point> > raw_contours;
   std::vector<cv::Vec4i> hierarchy;
-  cv::findContours(canny_img, contours, hierarchy, /*CV_RETR_TREE*/CV_RETR_LIST, CV_CHAIN_APPROX_NONE);
+  cv::findContours(canny_img, contours, hierarchy, /*cv::RETR_TREE*/cv::RETR_LIST, cv::CHAIN_APPROX_NONE);
 
   //TODO: Keep only contours that are not a hole
 

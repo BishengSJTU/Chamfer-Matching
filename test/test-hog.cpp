@@ -529,7 +529,7 @@ void detectHOG_impl(const cv::Mat &template_img, const cv::Mat &query_img, std::
       cv::Mat query_hogCell;
       calculateHOG_rect(query_hogCell, query_integralImages, query_roi, 9, 3, 3);
 //      double dist = cv::norm(template_hogCell, query_hogCell, cv::NORM_L2);
-      double dist = cv::compareHist(template_hogCell, query_hogCell, CV_COMP_BHATTACHARYYA);
+      double dist = cv::compareHist(template_hogCell, query_hogCell, cv::HISTCMP_BHATTACHARYYA);
 
       matching_cost_map.at<float>(i,j) = (float) dist;
     }
